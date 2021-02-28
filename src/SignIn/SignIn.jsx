@@ -116,7 +116,7 @@ const verifyErrorMessageName = (fieldName) => {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <h2>Admin Hearth Beat</h2>
+        <h2>NFS TI</h2>
         <Typography component="h1" variant="h5">
           
         </Typography>

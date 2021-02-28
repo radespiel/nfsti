@@ -2,14 +2,12 @@ import {React, useEffect, useState } from 'react';
 import Box from '@material-ui/core/Box';
 import axios from "axios";
 import { DataGrid } from '@material-ui/data-grid';
-import SelectedUser from '../SelectedUser/SelectedUser'
 import TextField from '@material-ui/core/TextField';
-import Divider from '@material-ui/core/Divider';
 
 const columns = [
     {field: 'quem', headerName: 'Responsável', width: 220 },
     {field: 'fornecedor', headerName: 'Fornecedor', width: 220 },
-    {field: 'cnpj', headerName: 'cnpj', width: 220 },
+    {field: 'cnpj', headerName: 'CNPJ', width: 220 },
     {field: 'numero', headerName: 'Número NF', width: 250 },
     {field: 'serie', headerName: 'Série', width: 100 },
     {field: 'carimbo', headerName: 'Carimbo', width: 250 },
@@ -24,7 +22,6 @@ const columns = [
 export default function Notas(props) {
     const [notas, setNotas] = useState([]); 
     const [search, setSearch] = useState("");   
-    const [selected, setSelected] = useState({email: "", id: "", name: "", birthdate: "", condition: "", forcereload: 0});
     
     function emptyze() {
       if(search === ""){
@@ -47,7 +44,7 @@ export default function Notas(props) {
     .catch((error) => {
       console.error(error)
     })
-      }, [selected, search])
+      }, [search])
 
       return (
      <Box style={{ width: '100%' }} >
@@ -59,10 +56,9 @@ export default function Notas(props) {
       label="Pesquisar por número da nota"
       onChange={e => setSearch(e.target.value)}
         />
-     <div style={{ height: 400, width: '100%' }}>
-        <DataGrid disableMultipleSelection={true} rows={notas} columns={columns} pageSize={5} onCellClick={(cell)=>{console.log(cell.data);if(cell.colDef.field==="anexo"){ window.open("http://"+cell.data.anexo)}}} />
+     <div style={{ height: 800, width: '100%' }}>
+        <DataGrid disableMultipleSelection={true} rows={notas} columns={columns} pageSize={10} onCellClick={(cell)=>{console.log(cell.data);if(cell.colDef.field==="anexo"){ window.open("http://"+cell.data.anexo)}}} />
     </div>
-      <SelectedUser tokenp={props.tokenp} selectedRow={selected} changeSelected={setSelected}></SelectedUser>
       </Box>
       )
 }
