@@ -30,8 +30,22 @@ export default function Lancar(props) {
     };
   }
 
-  function lancaNf(){
-    axios.post('http://localhost:3001/notas', {
+  async function lancaNf(){
+    await axios.post('http://localhost:3001/notas/lancatriare', {
+      PHPSESSID: localStorage.getItem('PHPSESSID'),
+    }, {
+      headers: {
+      }
+  })
+  .then((res) => { 
+    alert("nota lançada com sucesso!")
+  })
+  .catch((error) => {
+    alert("Deu algum erro :(")
+    console.error(error)
+  })
+
+    axios.post('http://localhost:3001/notas/lancanfsti', {
       fornecedor: document.getElementById("fornecedor").value,
       cnpj: document.getElementById("cnpj").value,
       vencimento: document.getElementById("vencimento").value,
@@ -42,7 +56,7 @@ export default function Lancar(props) {
       temcer: cer,
       obs: document.getElementById("obs").value,
       anexopdf: base64Pdf,
-      quem: "esradesp",
+      quem: localStorage.getItem('cookieLogin'),
       triare: "251.123"
     }, {
       headers: {

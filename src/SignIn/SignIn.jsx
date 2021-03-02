@@ -74,10 +74,17 @@ export default function SignIn(props) {
 const onSubmit = async (data) => {
     setbackendMessage("");
     setloading(true);
-    axios.post(`/login/admin`, data, options)
+    axios.post(`http://localhost:3001/notas/login`, {
+      "login": document.getElementById("user").value,
+      "senha": document.getElementById("password").value,
+    }, {
+      headers: {
+      }
+  })
     .then(res => {
-      localStorage.setItem('token',res.data.authJwtToken);
-      props.updateToken(data.authJwtToken);
+      localStorage.setItem("PHPSESSID", res.data.PHPSESSID);
+      localStorage.setItem('cookieLogin', res.data.cookieLogin);
+      props.updateToken(res.data.PHPSESSID)
       setloading(false);
       return;
     })

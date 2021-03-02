@@ -122,7 +122,8 @@ export default function Dashboard(props) {
 
   const handleLogout = async (evt) => {
     evt.preventDefault();
-    localStorage.removeItem('token');
+    localStorage.removeItem('PHPSESSID')
+    localStorage.removeItem('cookieLogin');
     document.location.reload(true);
     props.updateToken(null);
 }

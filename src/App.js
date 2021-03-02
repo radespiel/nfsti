@@ -7,14 +7,14 @@ function App() {
 
   const [token, setToken] = useState(null);
   
-  const verify = localStorage.getItem('token');
+  const verify = localStorage.getItem('PHPSESSID');
   console.log("verify:", verify)
   if(verify !== null && verify != token) {
     setToken(verify)
     console.log('token no app', token)    
   }
   
-  if(token != null){
+  if(token == null){
     return <SignIn updateToken={setToken}></SignIn>
   }
   else{
