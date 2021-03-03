@@ -10,9 +10,10 @@ const columns = [
     {field: 'cnpj', headerName: 'CNPJ', width: 220 },
     {field: 'numero', headerName: 'Número NF', width: 250 },
     {field: 'serie', headerName: 'Série', width: 100 },
+    {field: 'valor', headerName: 'Valor', width: 100 },
     {field: 'carimbo', headerName: 'Carimbo', width: 250 },
     {field: 'vencimentoconverted', headerName: 'Vencimento', width: 250},
-    {field: 'temcer', headerName: 'CER', width: 100,},
+    {field: 'cer', headerName: 'CER', width: 100,},
     {field: 'temoc', headerName: 'OC', width: 100,},
     {field: 'obs', headerName: 'Observações', width: 300,},
     {field: 'triare', headerName: 'Triare', width: 300,},
@@ -57,7 +58,7 @@ export default function Notas(props) {
       onChange={e => setSearch(e.target.value)}
         />
      <div style={{ height: 800, width: '100%' }}>
-        <DataGrid disableMultipleSelection={true} rows={notas} columns={columns} pageSize={10} onCellClick={(cell)=>{console.log(cell.data);if(cell.colDef.field==="anexo"){ window.open("http://"+cell.data.anexo)}}} />
+        <DataGrid disableMultipleSelection={true} rows={notas} columns={columns} pageSize={10} onCellClick={(cell)=>{console.log(cell.data);if(cell.colDef.field==="anexo"){window.open("http://"+window.location.hostname+":3001"+cell.data.anexo)}}} />
     </div>
       </Box>
       )

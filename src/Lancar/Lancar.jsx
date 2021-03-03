@@ -31,33 +31,29 @@ export default function Lancar(props) {
   }
 
   async function lancaNf(){
+    function analisaoc (){
+      if(oc === true){
+      return 'S'
+      }
+      else {
+        return ''
+      }
+    }
     await axios.post('http://localhost:3001/notas/lancatriare', {
       PHPSESSID: localStorage.getItem('PHPSESSID'),
-    }, {
-      headers: {
-      }
-  })
-  .then((res) => { 
-    alert("nota lançada com sucesso!")
-  })
-  .catch((error) => {
-    alert("Deu algum erro :(")
-    console.error(error)
-  })
-
-    axios.post('http://localhost:3001/notas/lancanfsti', {
       fornecedor: document.getElementById("fornecedor").value,
       cnpj: document.getElementById("cnpj").value,
       vencimento: document.getElementById("vencimento").value,
       carimbo: document.getElementById("carimbo").value,
       numero: document.getElementById("numeronf").value,
       serie: document.getElementById("serienf").value,
+      valor: document.getElementById("valor").value,
+      cer: document.getElementById("cer").value,
       temoc: oc,
-      temcer: cer,
+      receb: analisaoc(),
       obs: document.getElementById("obs").value,
       anexopdf: base64Pdf,
       quem: localStorage.getItem('cookieLogin'),
-      triare: "251.123"
     }, {
       headers: {
       }
@@ -108,6 +104,13 @@ export default function Lancar(props) {
           variant="outlined"
           margin="normal"
           fullWidth
+          id="valor"
+          label="Valor"
+        />
+        <TextField
+          variant="outlined"
+          margin="normal"
+          fullWidth
           id="vencimento"
           label=""
           format="YYYY-MM-DD"
@@ -120,6 +123,13 @@ export default function Lancar(props) {
           id="carimbo"
           label="Carimbo"
         />
+        <TextField
+          variant="outlined"
+          margin="normal"
+          fullWidth
+          id="cer"
+          label="CER"
+        />
         <label>Possui Ordem de Compra</label>
         <Checkbox
             checked={oc}
@@ -129,14 +139,6 @@ export default function Lancar(props) {
             id="temoc"
           />
           <br></br>
-          <label>Possui CER</label>
-        <Checkbox
-            checked={cer}
-            onChange={handleCerChange}
-            name="checkedB"
-            color="primary"
-            id="temcer"
-          />
           <br></br>
           <TextField
           id="obs"
